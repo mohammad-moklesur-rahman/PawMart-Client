@@ -1,0 +1,1 @@
+React, React Router, Tailwind Css, DaisyUI, 
