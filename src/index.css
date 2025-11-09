@@ -1,2 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 @import "tailwindcss";
 @plugin "daisyui";
+
+@plugin "daisyui/theme" {
+  name: "light";
+  default: true;
+  --color-primary: #FF9292;
+  --color-secondary: #D6F4ED;
+  --color-accent: #27374D;
+}
+
+*{
+  font-family: "Inter", sans-serif;
+}
+
+.active{
+  @apply border border-primary
+}
+
+.primary-btn{
+  @apply rounded-full bg-secondary text-green-500 px-6
+}
