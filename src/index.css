@@ -24,8 +24,17 @@
   @apply rounded-full bg-secondary text-green-500 px-6;
 }
 
-/* * Swiper Background Image */
+/* * Auth Image */
+.authImg{
+  height: 100vh;
+  background: url(../src/assets/authImg.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 
+
+/* * Swiper Background Image */
 .bgImg1 {
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)),
     url(../src/assets/slide1.png);

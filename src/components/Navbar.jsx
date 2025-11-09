@@ -4,7 +4,7 @@ import logo from "../assets/logo.png";
 import { useState } from "react";
 
 const Navbar = () => {
-  const [user, setUser] = useState(true);
+  const [user, setUser] = useState(false);
   const menu = (
     <>
       {user ? (
