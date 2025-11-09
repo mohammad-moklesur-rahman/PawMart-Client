@@ -1,10 +1,25 @@
 import { Link, NavLink } from "react-router";
 import MyContainer from "./MyContainer";
 import logo from "../assets/logo.png";
-import { useState } from "react";
+import useAuth from "../hooks/UseAuth";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
-  const [user, setUser] = useState(false);
+  const { user, signOUt } = useAuth();
+  const handelSignOut = () => {
+    signOUt()
+      .then(() => {
+        toast.success("Signed out successfully!");
+      })
+      .catch((error) => {
+        if (error.code === "auth/no-current-user") {
+          toast.warning("No user is currently signed in.");
+        } else {
+          toast.error("Error signing out. Please try again.");
+        }
+      });
+  };
+
   const menu = (
     <>
       {user ? (
@@ -37,6 +52,7 @@ const Navbar = () => {
       )}
     </>
   );
+
   return (
     <div className="bg-primary-content">
       <MyContainer>
@@ -89,15 +105,26 @@ const Navbar = () => {
           <div className="navbar-end">
             {user ? (
               <>
-                <div className="avatar avatar-online">
-                  <div className="w-12 rounded-full border-2 border-primary">
-                    <img
-                      src={
-                        user.photoURL ||
-                        "https://img.icons8.com/?size=100&id=z-JBA_KtSkxG&format=png&color=000000"
-                      }
-                    />
+                <div className="dropdown dropdown-end">
+                  <div tabIndex={0} className="avatar avatar-online">
+                    <div className="w-12 rounded-full border-2 border-primary">
+                      <img
+                        src={
+                          user.photoURL ||
+                          "https://img.icons8.com/?size=100&id=z-JBA_KtSkxG&format=png&color=000000"
+                        }
+                      />
+                    </div>
                   </div>
+
+                  <ul
+                    tabIndex="-1"
+                    className="dropdown-content menu bg-secondary rounded-box z-10 w-25 p-1 mt-2 shadow-sm"
+                  >
+                    <li>
+                      <a onClick={handelSignOut}>Sign Out</a>
+                    </li>
+                  </ul>
                 </div>
               </>
             ) : (
