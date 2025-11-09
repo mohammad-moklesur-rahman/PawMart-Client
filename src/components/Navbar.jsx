@@ -38,7 +38,7 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="bg-[#DDE6ED]">
+    <div className="bg-primary-content">
       <MyContainer>
         <div className="navbar">
           <div className="navbar-start">

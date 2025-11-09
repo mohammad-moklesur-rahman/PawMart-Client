@@ -1,1 +1,1 @@
-React, React Router, Tailwind Css, DaisyUI, 
+React, React Router, Tailwind Css, DaisyUI, React Icons,
