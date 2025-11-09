@@ -2,7 +2,7 @@ import { Link, NavLink } from "react-router";
 import MyContainer from "./MyContainer";
 import logo from "../assets/logo.png";
 import useAuth from "../hooks/UseAuth";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
   const { user, signOUt } = useAuth();

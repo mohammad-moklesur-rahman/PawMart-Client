@@ -4,13 +4,13 @@ import "./index.css";
 import { RouterProvider } from "react-router";
 import router from "./routes/Router.jsx";
 import AuthProvider from "./context/Firebase/AuthProvider.jsx";
-import { ToastContainer } from "react-toastify";
+import { Toaster } from 'react-hot-toast';
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <AuthProvider>
       <RouterProvider router={router} />
-      <ToastContainer />
+      <Toaster />
     </AuthProvider>
   </StrictMode>
 );

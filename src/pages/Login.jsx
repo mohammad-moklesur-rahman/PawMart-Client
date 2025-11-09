@@ -4,7 +4,7 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 import { Link, Navigate } from "react-router";
 import MyContainer from "../components/MyContainer";
 import useAuth from "../hooks/UseAuth";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const { loginWithEmailAndPassword, signInWithGoogle, setUser, user } =

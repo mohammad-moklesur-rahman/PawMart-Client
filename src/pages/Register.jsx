@@ -2,10 +2,10 @@ import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { Link, Navigate } from "react-router";
-import { toast } from "react-toastify";
 import MyContainer from "../components/MyContainer";
 import useAuth from "../hooks/UseAuth";
 import { updateProfile } from "firebase/auth";
+import toast from "react-hot-toast";
 
 const Register = () => {
   const { signUpWithEmailAndPassWord, signInWithGoogle, setUser, user } =
