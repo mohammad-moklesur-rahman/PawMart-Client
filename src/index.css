@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 
 @import "tailwindcss";
 @plugin "daisyui";
@@ -6,20 +6,100 @@
 @plugin "daisyui/theme" {
   name: "light";
   default: true;
-  --color-primary: #FF9292;
-  --color-secondary: #D6F4ED;
-  --color-accent: #27374D;
-  --color-primary-content: #DDE6ED;
+  --color-primary: #ff9292;
+  --color-secondary: #d6f4ed;
+  --color-accent: #27374d;
+  --color-primary-content: #dde6ed;
 }
 
-*{
+* {
   font-family: "Inter", sans-serif;
 }
 
-.active{
-  @apply border border-primary
+.active {
+  @apply border border-primary;
 }
 
-.primary-btn{
-  @apply rounded-full bg-secondary text-green-500 px-6
+.primary-btn {
+  @apply rounded-full bg-secondary text-green-500 px-6;
+}
+
+/* * Swiper Background Image */
+
+.bgImg1 {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)),
+    url(../src/assets/slide1.png);
+}
+
+.bgImg2 {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)),
+    url(../src/assets/slide2.png);
+}
+
+.bgImg3 {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)),
+    url(../src/assets/slide3.png);
+}
+
+.bgImg1,
+.bgImg2,
+.bgImg3 {
+  height: 90vh;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* * Swiper Css */
+.swiper {
+  width: 100%;
+  height: 89vh;
+}
+
+.swiper-slide {
+  text-align: left;
+  font-size: 20px;
+  background: #d6f4ed;
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.autoplay-progress {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  z-index: 10;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: var(--color-primary);
+}
+
+.autoplay-progress svg {
+  --progress: 0;
+  position: absolute;
+  left: 0;
+  top: 0px;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  stroke-width: 4px;
+  stroke: var(--color-primary);
+  fill: none;
+  stroke-dashoffset: calc(125.6px * (1 - var(--progress)));
+  stroke-dasharray: 125.6;
+  transform: rotate(-90deg);
 }

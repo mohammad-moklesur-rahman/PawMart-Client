@@ -1,8 +1,14 @@
+import ContentSwiper from "../components/Home/ContentSwiper"
 
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <>
+    {/* Banner Section */}
+      <section>
+        <ContentSwiper />
+      </section>
+    </>
   )
 }
 

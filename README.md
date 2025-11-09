@@ -1,1 +1,1 @@
-React, React Router, Tailwind Css, DaisyUI, React Icons,
+React, React Router, Tailwind Css, DaisyUI, React Icons, Swiper, Animate.css, React Simple Typewriter, Aos,
