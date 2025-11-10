@@ -1,6 +1,7 @@
 import CategorySection from "../components/Home/CategorySection";
 import ContentSwiper from "../components/Home/ContentSwiper";
 import LatestListings from "../components/Home/LatestListings";
+import PetHeroes from "../components/Home/PetHeroes";
 import WhyAdoptSection from "../components/Home/WhyAdoptSection";
 
 const Home = () => {
@@ -24,6 +25,11 @@ const Home = () => {
       {/* short awareness section / WhyAdoptSection */}
       <section>
         <WhyAdoptSection />
+      </section>
+
+      {/* Pet Heroes Section */}
+      <section>
+        <PetHeroes />
       </section>
     </>
   );
