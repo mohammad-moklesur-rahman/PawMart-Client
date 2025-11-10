@@ -1,5 +1,6 @@
 import CategorySection from "../components/Home/CategorySection"
 import ContentSwiper from "../components/Home/ContentSwiper"
+import LatestListings from "../components/Home/LatestListings"
 
 
 const Home = () => {
@@ -13,6 +14,11 @@ const Home = () => {
       {/* Category Section */}
       <section>
         <CategorySection />
+      </section>
+
+      {/* Show latest 6 listings product */}
+      <section>
+        <LatestListings />
       </section>
     </>
   )

@@ -8,6 +8,7 @@
   default: true;
   --color-primary: #ff9292;
   --color-secondary: #d6f4ed;
+  --color-secondary-content: #E3FDFD;
   --color-accent: #27374d;
   --color-primary-content: #dde6ed;
 }
