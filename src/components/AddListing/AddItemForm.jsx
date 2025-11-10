@@ -2,13 +2,16 @@ import { useEffect, useState } from "react";
 import useAuth from "../../hooks/UseAuth";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Swal from "sweetalert2";
+import useAxios from "../../hooks/useAxios.jsx";
 
-const AddItemForm = ({ currentUser }) => {
+const AddItemForm = () => {
   const { user } = useAuth();
+  const axios = useAxios();
   const [formData, setFormData] = useState({
     name: "",
     category: "Pets",
-    price: "",
+    price: "0",
     location: "",
     description: "",
     image: "",
@@ -38,12 +41,44 @@ const AddItemForm = ({ currentUser }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // send formData to backend or Firebase here
+    Swal.fire({
+      title: "Do you want to save the item?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Save",
+      denyButtonText: `Don't save`,
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        axios.post("/products", formData);
+
+        Swal.fire("Saved!", "", "success");
+
+        // * Reset form data
+        setFormData({
+          name: "",
+          category: "Pets",
+          price: "0",
+          location: "",
+          description: "",
+          image: "",
+          email: user?.email || "",
+          date: "",
+        });
+      } else if (result.isDenied) {
+        Swal.fire("Changes are not saved", "", "info");
+      }
+    });
   };
 
   return (
     <div className="bg-secondary pb-20">
-      <h2 data-aos="fade-right" className="text-center text-2xl text-accent font-bold py-8">Pet owners or shop owners can add new listings.</h2>
+      <h2
+        data-aos="fade-right"
+        className="text-center text-2xl text-accent font-bold py-8"
+      >
+        Pet owners or shop owners can add new listings.
+      </h2>
       <div className="max-w-2xl mx-auto bg-primary-content p-8 rounded-2xl shadow-md">
         <h2 className="text-[20px] text-accent font-semibold text-center mb-4">
           Add Product / Pet
@@ -60,7 +95,7 @@ const AddItemForm = ({ currentUser }) => {
               name="name"
               value={formData.name}
               onChange={handleChange}
-              placeholder="Enter name"
+              placeholder="Enter product/pet name"
               className="input outline-primary focus:border-secondary w-full"
               required
             />
@@ -179,8 +214,11 @@ const AddItemForm = ({ currentUser }) => {
           </div>
 
           {/* Submit */}
-          <button type="submit" className="btn bg-secondary text-green-500 w-full mt-2">
-            Submit
+          <button
+            type="submit"
+            className="btn bg-secondary text-green-500 w-full mt-2"
+          >
+            Add Item
           </button>
         </form>
       </div>
