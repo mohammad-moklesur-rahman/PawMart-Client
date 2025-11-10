@@ -89,7 +89,7 @@ const SuppliesCard = () => {
           {filteredData.map((productInfo) => (
             <div
               key={productInfo._id}
-              className="hover:scale-105 cursor-pointer transition-all"
+              className="hover:scale-105 cursor-pointer transition-transform duration-200"
             >
               <div className="card bg-primary h-full shadow-sm">
                 <figure className="px-4 pt-4">
