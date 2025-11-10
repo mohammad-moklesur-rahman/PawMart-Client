@@ -1,12 +1,12 @@
-import CategorySection from "../components/Home/CategorySection"
-import ContentSwiper from "../components/Home/ContentSwiper"
-import LatestListings from "../components/Home/LatestListings"
-
+import CategorySection from "../components/Home/CategorySection";
+import ContentSwiper from "../components/Home/ContentSwiper";
+import LatestListings from "../components/Home/LatestListings";
+import WhyAdoptSection from "../components/Home/WhyAdoptSection";
 
 const Home = () => {
   return (
     <>
-    {/* Banner Section */}
+      {/* Banner Section */}
       <section>
         <ContentSwiper />
       </section>
@@ -20,8 +20,13 @@ const Home = () => {
       <section>
         <LatestListings />
       </section>
-    </>
-  )
-}
 
-export default Home
+      {/* short awareness section / WhyAdoptSection */}
+      <section>
+        <WhyAdoptSection />
+      </section>
+    </>
+  );
+};
+
+export default Home;
