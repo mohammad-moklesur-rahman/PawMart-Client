@@ -7,6 +7,7 @@ import MyListings from "../pages/MyListings";
 import MyOrders from "../pages/MyOrders";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import CategoryFilteredProduct from "../pages/CategoryFilteredProduct";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: "/my-orders",
         element: <MyOrders />,
+      },
+      {
+        path: "/category-filtered-product/:categoryName",
+        Component: CategoryFilteredProduct,
       },
       {
         path: "/login",

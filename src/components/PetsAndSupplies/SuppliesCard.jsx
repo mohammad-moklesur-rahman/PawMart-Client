@@ -101,20 +101,20 @@ const SuppliesCard = () => {
                 </figure>
                 <div className="card-body">
                   <h2 className="card-title text-accent">{productInfo.name}</h2>
-                  <p className="text-secondary">
-                    <span className="font-semibold text-gray-800">
+                  <p className="text-gray-800">
+                    <span className="font-semibold">
                       Category:
                     </span>{" "}
                     {productInfo.category}
                   </p>
-                  <p className="text-secondary">
-                    <span className="font-semibold text-gray-800">
+                  <p className="text-gray-800">
+                    <span className="font-semibold ">
                       Location:
                     </span>{" "}
                     {productInfo.location}
                   </p>
-                  <p className="text-secondary">
-                    <span className="font-semibold text-gray-800">Price:</span>{" "}
+                  <p className="text-gray-800">
+                    <span className="font-semibold">Price:</span>{" "}
                     ${productInfo.price}
                   </p>
                   <div className="card-actions">
