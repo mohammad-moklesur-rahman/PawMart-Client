@@ -1,9 +1,21 @@
 import MyContainer from "../MyContainer";
+import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { useEffect } from "react";
 
 const WhyAdoptSection = () => {
+  // * for Aos
+  useEffect(() => {
+    AOS.init({ duration: 1000, once: false });
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      AOS.refresh();
+    }, 500);
+    return () => clearTimeout(timer);
+  }, []);
+
   const benefits = [
     {
       icon: "❤️",
@@ -21,14 +33,6 @@ const WhyAdoptSection = () => {
       description: "Adopt a pet and gain a loyal friend for life.",
     },
   ];
-
-  // * for Aos
-  useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      once: false,
-    });
-  }, []);
 
   return (
     <div className="bg-primary-content pb-20">

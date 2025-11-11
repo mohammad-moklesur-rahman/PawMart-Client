@@ -4,10 +4,12 @@ import useAxios from "../../hooks/useAxios";
 import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { useNavigate } from "react-router";
 
 const LatestListings = () => {
   const axios = useAxios();
   const [latestData, setLatestData] = useState([]);
+  const navigate = useNavigate();
 
   // * for Aos
   useEffect(() => {
@@ -64,7 +66,14 @@ const LatestListings = () => {
                       {productInfo.price}
                     </p>
                     <div className="card-actions">
-                      <button className="btn bg-secondary text-green-500 hover:bg-accent w-full">
+                      <button
+                        onClick={() =>
+                          navigate(
+                            `/pets-and-supplies/listing-details/${productInfo._id}`
+                          )
+                        }
+                        className="btn bg-secondary text-green-500 hover:bg-accent w-full"
+                      >
                         See Details
                       </button>
                     </div>

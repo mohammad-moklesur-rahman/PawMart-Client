@@ -8,6 +8,7 @@ import MyOrders from "../pages/MyOrders";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import CategoryFilteredProduct from "../pages/CategoryFilteredProduct";
+import ListingDetails from "../pages/ListingDetails";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
       {
         path: "/pets-and-supplies",
         Component: PetsAndSupplies,
+      },
+      {
+        path: "/pets-and-supplies/listing-details/:id",
+        element: <ListingDetails />,
       },
       {
         path: "/add-listing",

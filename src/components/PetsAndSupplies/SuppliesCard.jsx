@@ -3,12 +3,14 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import MyContainer from "../MyContainer";
 import useAxios from "../../hooks/useAxios";
+import { useNavigate } from "react-router";
 
 const SuppliesCard = () => {
   const axios = useAxios();
   const [data, setData] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get("/products").then((data) => {
@@ -102,23 +104,19 @@ const SuppliesCard = () => {
                 <div className="card-body">
                   <h2 className="card-title text-accent">{productInfo.name}</h2>
                   <p className="text-gray-800">
-                    <span className="font-semibold">
-                      Category:
-                    </span>{" "}
+                    <span className="font-semibold">Category:</span>{" "}
                     {productInfo.category}
                   </p>
                   <p className="text-gray-800">
-                    <span className="font-semibold ">
-                      Location:
-                    </span>{" "}
+                    <span className="font-semibold ">Location:</span>{" "}
                     {productInfo.location}
                   </p>
                   <p className="text-gray-800">
-                    <span className="font-semibold">Price:</span>{" "}
-                    ${productInfo.price}
+                    <span className="font-semibold">Price:</span> $
+                    {productInfo.price}
                   </p>
                   <div className="card-actions">
-                    <button className="btn bg-secondary text-green-500 hover:bg-accent w-full">
+                    <button onClick={() => navigate(`listing-details/${productInfo._id}`)} className="btn bg-secondary text-green-500 hover:bg-accent w-full">
                       See Details
                     </button>
                   </div>

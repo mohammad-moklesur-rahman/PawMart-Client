@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import useAxios from "../hooks/useAxios";
 import MyContainer from "../components/MyContainer";
 
@@ -7,6 +7,7 @@ const CategoryFilteredProduct = () => {
   const { categoryName } = useParams();
   const axios = useAxios();
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get(`/products?category=${categoryName}`).then((data) => {
@@ -52,7 +53,14 @@ const CategoryFilteredProduct = () => {
                     {productInfo.price}
                   </p>
                   <div className="card-actions">
-                    <button className="btn bg-secondary text-green-500 hover:bg-accent w-full">
+                    <button
+                      onClick={() =>
+                        navigate(
+                          `/pets-and-supplies/listing-details/${productInfo._id}`
+                        )
+                      }
+                      className="btn bg-secondary text-green-500 hover:bg-accent w-full"
+                    >
                       See Details
                     </button>
                   </div>

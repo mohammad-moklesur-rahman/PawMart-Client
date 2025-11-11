@@ -1,10 +1,22 @@
 import MyContainer from "../MyContainer";
-import AOS from "aos";
-import "aos/dist/aos.css";
 import { useEffect } from "react";
 import Marquee from "react-fast-marquee";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const PetHeroes = () => {
+  // * for Aos
+  useEffect(() => {
+    AOS.init({ duration: 1000, once: false });
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      AOS.refresh();
+    }, 500);
+    return () => clearTimeout(timer);
+  }, []);
+
   const heroes = [
     {
       name: "Sarah Ahmed",
@@ -36,14 +48,6 @@ const PetHeroes = () => {
     },
   ];
 
-  // * for Aos
-  useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      once: false,
-    });
-  }, []);
-
   return (
     <div className="bg-secondary pb-20">
       <MyContainer>
@@ -54,7 +58,7 @@ const PetHeroes = () => {
           Meet Our Pet Heroes
         </h2>
         <Marquee speed={70} pauseOnHover>
-          <div className="text-center px-4">
+          <div data-aos="fade-up" className="text-center px-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
               {heroes.map((hero, idx) => (
                 <div
