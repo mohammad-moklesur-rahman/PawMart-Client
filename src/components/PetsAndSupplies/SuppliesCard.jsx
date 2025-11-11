@@ -53,79 +53,88 @@ const SuppliesCard = () => {
         All available listing products
       </h2>
 
-      {/* Category Filter Dropdown */}
-      <div className="mb-6 flex justify-center items-center gap-2">
-        <h2 className="text-[18px] font-extrabold text-accent">
-          Filter by category:
-        </h2>
-        <div className="relative w-42 sm:w-64">
-          <select
-            value={selectedCategory}
-            onChange={handleCategoryChange}
-            className="appearance-none w-full bg-primary-content border-0 rounded-lg py-3 px-4 pr-10 text-primary leading-tight focus:outline-none"
-          >
-            {categories.map((category) => (
-              <option key={category} value={category}>
-                {category}
-              </option>
-            ))}
-          </select>
-          {/* Arrow icon */}
-          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-            <svg
-              className="fill-current h-4 w-4"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
+      <div data-aos="fade-up">
+        {/* Category Filter Dropdown */}
+        <div className="mb-6 flex justify-center items-center gap-2">
+          <h2 className="text-[18px] font-extrabold text-accent">
+            Filter by category:
+          </h2>
+          <div className="relative w-42 sm:w-64">
+            <select
+              value={selectedCategory}
+              onChange={handleCategoryChange}
+              className="appearance-none w-full bg-primary-content border-0 rounded-lg py-3 px-4 pr-10 text-primary leading-tight focus:outline-none"
             >
-              <path d="M5.516 7.548l4.484 4.484 4.484-4.484L15.484 9l-5 5-5-5z" />
-            </svg>
+              {categories.map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
+            {/* Arrow icon */}
+            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+              <svg
+                className="fill-current h-4 w-4"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+              >
+                <path d="M5.516 7.548l4.484 4.484 4.484-4.484L15.484 9l-5 5-5-5z" />
+              </svg>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* product Card */}
-      {loading ? (
-        <h2>Loadding....</h2>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredData.map((productInfo) => (
-            <div
-              key={productInfo._id}
-              className="hover:scale-105 cursor-pointer transition-transform duration-200"
-            >
-              <div className="card bg-primary h-full shadow-sm">
-                <figure className="px-4 pt-4">
-                  <img
-                    src={productInfo.image}
-                    alt={productInfo.category}
-                    className="rounded-xl h-50 w-full"
-                  />
-                </figure>
-                <div className="card-body">
-                  <h2 className="card-title text-accent">{productInfo.name}</h2>
-                  <p className="text-gray-800">
-                    <span className="font-semibold">Category:</span>{" "}
-                    {productInfo.category}
-                  </p>
-                  <p className="text-gray-800">
-                    <span className="font-semibold ">Location:</span>{" "}
-                    {productInfo.location}
-                  </p>
-                  <p className="text-gray-800">
-                    <span className="font-semibold">Price:</span> $
-                    {productInfo.price}
-                  </p>
-                  <div className="card-actions">
-                    <button onClick={() => navigate(`listing-details/${productInfo._id}`)} className="btn bg-secondary text-green-500 hover:bg-accent w-full">
-                      See Details
-                    </button>
+        {/* product Card */}
+        {loading ? (
+          <h2>Loadding....</h2>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredData.map((productInfo) => (
+              <div
+                key={productInfo._id}
+                className="hover:scale-105 cursor-pointer transition-transform duration-200"
+              >
+                <div className="card bg-primary h-full shadow-sm">
+                  <figure className="px-4 pt-4">
+                    <img
+                      src={productInfo.image}
+                      alt={productInfo.category}
+                      className="rounded-xl h-50 w-full"
+                    />
+                  </figure>
+                  <div className="card-body">
+                    <h2 className="card-title text-accent">
+                      {productInfo.name}
+                    </h2>
+                    <p className="text-gray-800">
+                      <span className="font-semibold">Category:</span>{" "}
+                      {productInfo.category}
+                    </p>
+                    <p className="text-gray-800">
+                      <span className="font-semibold ">Location:</span>{" "}
+                      {productInfo.location}
+                    </p>
+                    <p className="text-gray-800">
+                      <span className="font-semibold">Price:</span> $
+                      {productInfo.price}
+                    </p>
+                    <div className="card-actions">
+                      <button
+                        onClick={() =>
+                          navigate(`listing-details/${productInfo._id}`)
+                        }
+                        className="btn bg-secondary text-green-500 hover:bg-accent w-full"
+                      >
+                        See Details
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
-      )}
+            ))}
+          </div>
+        )}
+      </div>
     </MyContainer>
   );
 };

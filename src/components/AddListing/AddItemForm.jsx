@@ -79,7 +79,7 @@ const AddItemForm = () => {
       >
         Pet owners or shop owners can add new listings.
       </h2>
-      <div className="max-w-2xl mx-auto bg-primary-content p-8 rounded-2xl shadow-md">
+      <div data-aos="fade-up" className="max-w-2xl mx-auto bg-primary-content p-8 rounded-2xl shadow-md">
         <h2 className="text-[20px] text-accent font-semibold text-center mb-4">
           Add Product / Pet
         </h2>
