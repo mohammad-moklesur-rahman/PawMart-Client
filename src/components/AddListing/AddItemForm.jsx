@@ -11,7 +11,7 @@ const AddItemForm = () => {
   const [formData, setFormData] = useState({
     name: "",
     category: "Pets",
-    price: "0",
+    price: 0,
     location: "",
     description: "",
     image: "",
@@ -58,7 +58,7 @@ const AddItemForm = () => {
         setFormData({
           name: "",
           category: "Pets",
-          price: "0",
+          price: 0,
           location: "",
           description: "",
           image: "",

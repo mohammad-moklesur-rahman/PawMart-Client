@@ -63,7 +63,7 @@ const ListingDetails = () => {
                 <p className="text-gray-800 text-justify pt-2">{description}</p>
 
                 {/* Order Form */}
-                <OrderForm />
+                <OrderForm detailsInfo={detailsInfo} />
               </div>
             </div>
           </div>
