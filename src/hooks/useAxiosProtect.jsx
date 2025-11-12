@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import useAuth from "./useAuth";
 
 const protectInstance = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: "https://pawmart-server-kappa.vercel.app/api",
 });
 
 const useAxiosProtect = () => {
