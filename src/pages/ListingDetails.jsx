@@ -41,10 +41,10 @@ const ListingDetails = () => {
   return (
     <div className="bg-accent lg:bg-base-200">
       <MyContainer>
-        <div className="bg-secondary grid grid-cols-12 gap-12 pl-6">
+        <div className="bg-secondary grid lg:grid-cols-12 gap-12 pl-6">
           {/* left area for details */}
           <div className="md:col-span-8">
-            <div className="px-4 md:px-0">
+            <div className="px-2 lg:px-0">
               <h2
                 data-aos="fade-right"
                 className="text-2xl text-accent font-bold py-10"
@@ -77,7 +77,7 @@ const ListingDetails = () => {
           </div>
 
           {/* Right Aside */}
-          <aside className="bg-secondary-content col-span-4 pb-20 px-8">
+          <aside className="hidden lg:block bg-secondary-content col-span-4 pb-20 px-8">
             <h2
               data-aos="fade-left"
               className="text-center text-2xl text-accent font-bold py-10"

@@ -48,14 +48,14 @@ const ContentSwiper = () => {
         <SwiperSlide>
           <div className="bgImg1">
             <MyContainer>
-              <div className="flex justify-between text-justify text-primary-content">
-                <div className="w-2/2 ml-20 mt-60 text-[20px] font-bold text-green-500">
+              <div className="flex flex-col lg:flex-row lg:justify-between text-justify text-primary-content">
+                <div className="w-2/2 lg:ml-20 mt-20 px-4 lg:px-0 lg:mt-60 text-[20px] font-bold text-green-500">
                   <span>{typewriter1}</span>
                   <Cursor cursorColor="#ff9292" />
                 </div>
                 <div
                   data-aos="fade-left"
-                  className="ml-120 mt-30 animate__animated animate__pulse animate__infinite"
+                  className="mx-4 lg:mx-0 lg:ml-120 mt-8 lg:mt-40 animate__animated animate__pulse animate__infinite"
                 >
                   <p>
                     The best friendships start with a furry paw. Bring home
@@ -71,14 +71,14 @@ const ContentSwiper = () => {
         <SwiperSlide>
           <div className="bgImg2">
             <MyContainer>
-              <div className="flex justify-between text-justify text-primary-content">
-                <div className="w-2/2 ml-20 mt-60 text-[20px] font-bold text-green-500">
+              <div className="flex flex-col lg:flex-row lg:justify-between text-justify text-primary-content">
+                <div className="w-2/2 lg:ml-20 mt-20 px-4 lg:px-0 lg:mt-60 text-[20px] font-bold text-green-500">
                   <span>{typewriter2}</span>
                   <Cursor cursorColor="#ff9292" />
                 </div>
                 <div
                   data-aos="fade-left"
-                  className="ml-120 mt-30 animate__animated animate__pulse animate__infinite"
+                  className="mx-4 lg:mx-0 lg:ml-120 mt-8 lg:mt-40 animate__animated animate__pulse animate__infinite"
                 >
                   <p>
                     Adoption saves lives — be the hero a pet is waiting for.
@@ -94,14 +94,14 @@ const ContentSwiper = () => {
         <SwiperSlide>
           <div className="bgImg3">
             <MyContainer>
-              <div className="flex justify-between text-justify text-primary-content">
-                <div className="w-2/2 ml-20 mt-60 text-[20px] font-bold text-green-500">
+              <div className="flex flex-col lg:flex-row lg:justify-between text-justify text-primary-content">
+                <div className="w-2/2 lg:ml-20 mt-20 px-4 lg:px-0 lg:mt-60 text-[20px] font-bold text-green-500">
                   <span>{typewriter3}</span>
                   <Cursor cursorColor="#ff9292" />
                 </div>
                 <div
                   data-aos="fade-left"
-                  className="ml-120 mt-30 animate__animated animate__pulse animate__infinite"
+                  className="mx-4 lg:mx-0 lg:ml-120 mt-8 lg:mt-40 animate__animated animate__pulse animate__infinite"
                 >
                   <p>
                     Every pet deserves love, care, and a safe home. Give love,

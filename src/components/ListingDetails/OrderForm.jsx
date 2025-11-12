@@ -79,7 +79,7 @@ const OrderForm = ({ detailsInfo }) => {
       {/* Open Button */}
       <div className="flex justify-center my-6 pb-10">
         <button
-          className="btn w-96 bg-secondary-content hover:bg-primary-content text-green-500 mt-2"
+          className="btn lg:w-96 bg-secondary-content hover:bg-primary-content text-green-500 mt-2"
           onClick={() => modalRef.current.showModal()}
         >
           Adopt / Order Now

@@ -59,7 +59,7 @@ const PetHeroes = () => {
         </h2>
         <Marquee speed={70} pauseOnHover>
           <div data-aos="fade-up" className="text-center px-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+            <div className="grid grid-cols-4 gap-8">
               {heroes.map((hero, idx) => (
                 <div
                   key={idx}

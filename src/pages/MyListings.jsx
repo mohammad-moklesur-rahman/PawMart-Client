@@ -71,7 +71,7 @@ const MyListings = () => {
   if (loading) return <LoadingSpinner />;
 
   return (
-    <div className="bg-secondary pb-20 pt-10">
+    <div className="bg-secondary px-2 pb-20 pt-10">
       <h2
         data-aos="fade-right"
         className="text-center text-2xl text-accent font-bold pb-10"

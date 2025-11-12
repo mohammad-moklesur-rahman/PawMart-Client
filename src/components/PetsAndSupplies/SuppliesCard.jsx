@@ -82,10 +82,10 @@ const SuppliesCard = () => {
       </h2>
 
       <div data-aos="fade-up">
-        <div className="mb-16 mt-7 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="mb-16 mt-7 flex flex-col lg:flex-row justify-between items-center gap-4">
           {/* Category Filter */}
           <div className="flex items-center gap-2">
-            <span className="text-[18px] font-extrabold text-accent">
+            <span className="hidden md:block text-[18px] font-extrabold text-accent">
               Filter by category:
             </span>
             <div className="relative w-42 sm:w-64">
@@ -113,8 +113,8 @@ const SuppliesCard = () => {
           </div>
 
           {/* Search Bar */}
-          <div className="flex items-center gap-2">
-            <span className="text-[18px] font-extrabold text-accent">
+          <div className="flex items-center mt-8 lg:mt-0 gap-2">
+            <span className="hidden md:block text-[18px] font-extrabold text-accent">
               Search:
             </span>
             <input

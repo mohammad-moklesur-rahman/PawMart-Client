@@ -99,11 +99,11 @@ const SalesReport = () => {
   if (loading) return <LoadingSpinner />;
 
   return (
-    <div className="bg-secondary pt-10 pb-20">
+    <div className="bg-secondary px-2 pt-10 pb-20">
       <MyContainer>
         <h2
           data-aos="fade-right"
-          className="text-center text-2xl text-accent font-bold"
+          className="text-center mb-4 text-2xl text-accent font-bold"
         >
           Sales Report
         </h2>
