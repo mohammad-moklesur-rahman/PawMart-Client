@@ -10,11 +10,13 @@ import Register from "../pages/Register";
 import CategoryFilteredProduct from "../pages/CategoryFilteredProduct";
 import ListingDetails from "../pages/ListingDetails";
 import PrivateRoute from "./PrivateRoute";
+import NotFound from "../pages/NotFound";
 
 const router = createBrowserRouter([
   {
     path: "/",
     Component: MainLayout,
+    errorElement: <NotFound />,
     children: [
       {
         index: true,

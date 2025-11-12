@@ -54,7 +54,7 @@ const SuppliesCard = () => {
 
     if (searchTimeout.current) clearTimeout(searchTimeout.current);
 
-    // Hide spinner after user stops typing
+    // * Hide spinner after user stops typing
     searchTimeout.current = setTimeout(() => {
       setLoadingSearch(false);
     }, 500);
