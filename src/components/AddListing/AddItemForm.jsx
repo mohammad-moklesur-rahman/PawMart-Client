@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import useAuth from "../../hooks/UseAuth";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Swal from "sweetalert2";
-import useAxios from "../../hooks/useAxios.jsx";
+import useAuth from "../../hooks/useAuth.jsx";
+import useAxiosProtect from "../../hooks/useAxiosProtect.jsx";
 
 const AddItemForm = () => {
   const { user } = useAuth();
-  const axios = useAxios();
+  const protectAxios = useAxiosProtect();
   const [formData, setFormData] = useState({
     name: "",
     category: "Pets",
@@ -42,29 +42,33 @@ const AddItemForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     Swal.fire({
-      title: "Do you want to save the item?",
+      title: "Do you want to save the product?",
       showDenyButton: true,
       showCancelButton: true,
       confirmButtonText: "Save",
       denyButtonText: `Don't save`,
-    }).then((result) => {
+    }).then(async (result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        axios.post("/products", formData);
+        try {
+          await protectAxios.post("/products", formData);
 
-        Swal.fire("Saved!", "", "success");
+          Swal.fire("Saved!", "", "success");
 
-        // * Reset form data
-        setFormData({
-          name: "",
-          category: "Pets",
-          price: 0,
-          location: "",
-          description: "",
-          image: "",
-          email: user?.email || "",
-          date: "",
-        });
+          // * Reset form data
+          setFormData({
+            name: "",
+            category: "Pets",
+            price: 0,
+            location: "",
+            description: "",
+            image: "",
+            email: user?.email || "",
+            date: "",
+          });
+        } catch {
+          Swal.fire("Error!", "Failed to save the product.", "error");
+        }
       } else if (result.isDenied) {
         Swal.fire("Changes are not saved", "", "info");
       }
@@ -79,7 +83,10 @@ const AddItemForm = () => {
       >
         Pet owners or shop owners can add new listings.
       </h2>
-      <div data-aos="fade-up" className="max-w-2xl mx-auto bg-primary-content p-8 rounded-2xl shadow-md">
+      <div
+        data-aos="fade-up"
+        className="max-w-2xl mx-auto bg-primary-content p-8 rounded-2xl shadow-md"
+      >
         <h2 className="text-[20px] text-accent font-semibold text-center mb-4">
           Add Product / Pet
         </h2>

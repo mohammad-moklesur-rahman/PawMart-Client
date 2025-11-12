@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import useAxios from "../hooks/useAxios";
 import MyContainer from "../components/MyContainer";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import AsideLatestProduct from "../components/ListingDetails/AsideLatestProduct";
 import OrderForm from "../components/ListingDetails/OrderForm";
 import LoadingSpinner from "../components/LoadingSpinner";
+import useAxiosProtect from "../hooks/useAxiosProtect";
 
 const ListingDetails = () => {
   const { id } = useParams();
-  const axios = useAxios();
+  const protectAxios = useAxiosProtect();
   const [detailsInfo, setDetailsInfo] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -25,13 +25,13 @@ const ListingDetails = () => {
   // * Listing details data
   useEffect(() => {
     setLoading(true);
-    axios
+    protectAxios
       .get(`/products/${id}`)
       .then((data) => {
         setDetailsInfo(data.data);
       })
       .finally(() => setLoading(false));
-  }, [axios, id]);
+  }, [protectAxios, id]);
 
   const { name, image, category, email, location, price, description } =
     detailsInfo || {};

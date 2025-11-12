@@ -2,13 +2,13 @@ import { useState, useRef, useEffect } from "react";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 import "animate.css";
-import useAuth from "../../hooks/UseAuth";
-import useAxios from "../../hooks/useAxios";
+import useAuth from "../../hooks/useAuth";
+import useAxiosProtect from "../../hooks/useAxiosProtect";
 
 const OrderForm = ({ detailsInfo }) => {
   const modalRef = useRef(null);
   const { user } = useAuth();
-  const axios = useAxios();
+  const protectAxios = useAxiosProtect();
 
   const [formData, setFormData] = useState({});
 
@@ -45,26 +45,30 @@ const OrderForm = ({ detailsInfo }) => {
       showCancelButton: true,
       confirmButtonText: "Confirm",
       denyButtonText: `Don't Confirm`,
-    }).then((result) => {
+    }).then(async (result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        axios.post("/orders", formData);
+        try {
+          await protectAxios.post("/orders", formData);
 
-        Swal.fire("Confirmed successfully!", "", "success");
+          Swal.fire("Confirmed successfully!", "", "success");
 
-        // * Reset form data
-        setFormData({
-          productId: detailsInfo?._id || "",
-          productName: detailsInfo?.name || "",
-          buyerName: user?.displayName || "",
-          email: user?.email || "",
-          quantity: detailsInfo?.category === "pet" ? 1 : 1,
-          price: detailsInfo?.price || 0,
-          address: "",
-          phone: "",
-          date: "",
-          notes: "",
-        });
+          // * Reset form data
+          setFormData({
+            productId: detailsInfo?._id || "",
+            productName: detailsInfo?.name || "",
+            buyerName: user?.displayName || "",
+            email: user?.email || "",
+            quantity: detailsInfo?.category === "pet" ? 1 : 1,
+            price: detailsInfo?.price || 0,
+            address: "",
+            phone: "",
+            date: "",
+            notes: "",
+          });
+        } catch {
+          Swal.fire("Error!", "Failed to confirm the order.", "error");
+        }
       } else if (result.isDenied) {
         Swal.fire("Changes are not saved", "", "info");
       }

@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
-import useAxios from "../hooks/useAxios";
-import useAuth from "../hooks/UseAuth";
 import MyContainer from "../components/MyContainer";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import UpdateModal from "../components/MyListings/UpdateModal";
 import Swal from "sweetalert2";
 import LoadingSpinner from "../components/LoadingSpinner";
+import useAuth from "../hooks/useAuth";
+import useAxiosProtect from "../hooks/useAxiosProtect";
 
 const MyListings = () => {
   const [myProducts, setMyProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const { user } = useAuth();
-  const axios = useAxios();
+  const protectAxios = useAxiosProtect();
 
   // * for Aos
   useEffect(() => {
@@ -25,11 +25,11 @@ const MyListings = () => {
   // * My listings product
   useEffect(() => {
     setLoading(true);
-    axios
+    protectAxios
       .get(`/products/my-listings?email=${user.email}`)
       .then((res) => setMyProducts(res.data))
       .finally(() => setLoading(false));
-  }, [axios, user.email]);
+  }, [protectAxios, user.email]);
 
   // * Update product from Ui
   const handleProductUpdated = (updatedProduct) => {
@@ -55,7 +55,7 @@ const MyListings = () => {
       if (result.isConfirmed) {
         try {
           // * delete product
-          await axios.delete(`/products/delete/${id}`);
+          await protectAxios.delete(`/products/delete/${id}`);
 
           Swal.fire("Deleted!", "Product has been deleted.", "success");
 

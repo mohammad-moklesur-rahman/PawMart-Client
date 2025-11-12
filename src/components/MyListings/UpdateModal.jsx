@@ -1,11 +1,11 @@
 import { useState, useRef } from "react";
 import Swal from "sweetalert2";
 import "animate.css";
-import useAxios from "../../hooks/useAxios";
+import useAxiosProtect from "../../hooks/useAxiosProtect";
 
 const UpdateModal = ({ p, onUpdated }) => {
   const modalRef = useRef(null);
-  const axios = useAxios();
+  const protectAxios = useAxiosProtect();
 
   const [formData, setFormData] = useState({});
 
@@ -34,7 +34,7 @@ const UpdateModal = ({ p, onUpdated }) => {
       if (result.isConfirmed) {
         try {
           // Call backend API to update product
-          await axios.put(`/products/update/${formData._id}`, formData);
+          await protectAxios.put(`/products/update/${formData._id}`, formData);
           onUpdated?.(formData); // parent to update UI
           Swal.fire("Updated!", "Product updated successfully.", "success");
         } catch {

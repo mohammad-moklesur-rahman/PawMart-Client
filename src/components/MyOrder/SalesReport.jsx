@@ -3,18 +3,18 @@ import autoTable from "jspdf-autotable";
 import Swal from "sweetalert2";
 import MyContainer from "../MyContainer";
 import { useEffect, useState } from "react";
-import useAuth from "../../hooks/UseAuth";
-import useAxios from "../../hooks/useAxios";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import LoadingSpinner from "../LoadingSpinner";
+import useAuth from "../../hooks/useAuth";
+import useAxiosProtect from "../../hooks/useAxiosProtect";
 
 const SalesReport = () => {
   const [salesData, setSalesData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const { user } = useAuth();
-  const axios = useAxios();
+  const protectAxios = useAxiosProtect();
 
   // * for Aos
   useEffect(() => {
@@ -27,11 +27,11 @@ const SalesReport = () => {
   // * Get My order
   useEffect(() => {
     setLoading(true);
-    axios
+    protectAxios
       .get(`/orders/my-orders?email=${user.email}`)
       .then((res) => setSalesData(res.data))
       .finally(() => setLoading(false));
-  }, [axios, user.email]);
+  }, [protectAxios, user.email]);
 
   const downloadReport = async () => {
     const result = await Swal.fire({

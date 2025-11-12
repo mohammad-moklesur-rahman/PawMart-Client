@@ -1,12 +1,11 @@
-import React from 'react'
-import AddItemForm from '../components/AddListing/AddItemForm'
+import AddItemForm from "../components/AddListing/AddItemForm";
 
 const AddListing = () => {
   return (
     <div>
       <AddItemForm />
     </div>
-  )
-}
+  );
+};
 
-export default AddListing
+export default AddListing;
