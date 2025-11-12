@@ -5,6 +5,7 @@ import MyContainer from "../components/MyContainer";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import UpdateModal from "../components/MyListings/UpdateModal";
+import Swal from "sweetalert2";
 
 const MyListings = () => {
   const [myProducts, setMyProducts] = useState([]);
@@ -19,16 +20,48 @@ const MyListings = () => {
     });
   }, []);
 
+  // * My listings product
   useEffect(() => {
     axios
-      .get(`/products?email=${user.email}`)
+      .get(`/products/my-listings?email=${user.email}`)
       .then((res) => setMyProducts(res.data));
   }, [axios, user.email]);
 
+  // * Update product from Ui
   const handleProductUpdated = (updatedProduct) => {
     setMyProducts((prev) =>
       prev.map((p) => (p._id === updatedProduct._id ? updatedProduct : p))
     );
+  };
+
+  // * Delete product from UI
+  const handleDeleteFromUI = (id) => {
+    setMyProducts((prev) => prev.filter((p) => p._id !== id));
+  };
+
+  // * Delete product
+  const handleDelete = async (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "This product will be permanently deleted!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          // * delete product
+          await axios.delete(`/products/delete/${id}`);
+
+          Swal.fire("Deleted!", "Product has been deleted.", "success");
+
+          // Update UI
+          handleDeleteFromUI(id);
+        } catch {
+          Swal.fire("Error!", "Failed to delete product.", "error");
+        }
+      }
+    });
   };
 
   return (
@@ -88,7 +121,7 @@ const MyListings = () => {
                         <UpdateModal p={p} onUpdated={handleProductUpdated} />
                         <button
                           className="btn btn-sm btn-error"
-                          onClick={() => alert(`Delete product: ${p.name}`)}
+                          onClick={() => handleDelete(p._id)}
                         >
                           Delete
                         </button>

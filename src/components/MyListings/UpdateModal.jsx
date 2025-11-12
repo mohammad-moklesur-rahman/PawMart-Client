@@ -85,8 +85,8 @@ const UpdateModal = ({ p, onUpdated }) => {
                 name="category"
                 value={formData.category}
                 onChange={handleChange}
-                className="input outline-primary focus:border-secondary w-full"
-                required
+                className="input outline-primary focus:border-secondary w-full bg-gray-100 cursor-not-allowed"
+                readOnly
               />
             </div>
 
