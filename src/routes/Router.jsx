@@ -9,6 +9,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import CategoryFilteredProduct from "../pages/CategoryFilteredProduct";
 import ListingDetails from "../pages/ListingDetails";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -25,19 +26,35 @@ const router = createBrowserRouter([
       },
       {
         path: "/pets-and-supplies/listing-details/:id",
-        element: <ListingDetails />,
+        element: (
+          <PrivateRoute>
+            <ListingDetails />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/add-listing",
-        element: <AddListing />,
+        element: (
+          <PrivateRoute>
+            <AddListing />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/my-listings",
-        element: <MyListings />,
+        element: (
+          <PrivateRoute>
+            <MyListings />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/my-orders",
-        element: <MyOrders />,
+        element: (
+          <PrivateRoute>
+            <MyOrders />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/category-filtered-product/:categoryName",
