@@ -4,9 +4,10 @@ import useAuth from "../hooks/UseAuth";
 import MyContainer from "../components/MyContainer";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import UpdateModal from "../components/MyListings/UpdateModal";
 
 const MyListings = () => {
-  const [myData, setMyData] = useState([]);
+  const [myProducts, setMyProducts] = useState([]);
   const { user } = useAuth();
   const axios = useAxios();
 
@@ -19,11 +20,16 @@ const MyListings = () => {
   }, []);
 
   useEffect(() => {
-    axios.get(`/products/my-listings?email=${user.email}`).then((date) => {
-      setMyData(date.data);
-    });
-  }, [axios, user]);
-  console.log(user.email);
+    axios
+      .get(`/products?email=${user.email}`)
+      .then((res) => setMyProducts(res.data));
+  }, [axios, user.email]);
+
+  const handleProductUpdated = (updatedProduct) => {
+    setMyProducts((prev) =>
+      prev.map((p) => (p._id === updatedProduct._id ? updatedProduct : p))
+    );
+  };
 
   return (
     <div className="bg-secondary pb-20 pt-10">
@@ -50,8 +56,8 @@ const MyListings = () => {
               </thead>
 
               <tbody className="text-gray-700 text-sm md:text-base">
-                {myData.length > 0 ? (
-                  myData.map((p, index) => (
+                {myProducts.length > 0 ? (
+                  myProducts.map((p, index) => (
                     <tr
                       key={p._id}
                       className="hover:bg-gray-50 transition duration-150"
@@ -79,12 +85,7 @@ const MyListings = () => {
                       <td className="p-3">{p.location}</td>
                       <td className="p-3">{p.date}</td>
                       <td className="p-3 flex flex-col md:flex-row gap-2 justify-center">
-                        <button
-                          className="btn btn-sm btn-primary"
-                          onClick={() => alert(`Update product: ${p.name}`)}
-                        >
-                          Update
-                        </button>
+                        <UpdateModal p={p} onUpdated={handleProductUpdated} />
                         <button
                           className="btn btn-sm btn-error"
                           onClick={() => alert(`Delete product: ${p.name}`)}
