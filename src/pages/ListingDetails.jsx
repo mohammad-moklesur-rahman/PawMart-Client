@@ -6,11 +6,13 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import AsideLatestProduct from "../components/ListingDetails/AsideLatestProduct";
 import OrderForm from "../components/ListingDetails/OrderForm";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const ListingDetails = () => {
   const { id } = useParams();
   const axios = useAxios();
   const [detailsInfo, setDetailsInfo] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   // * for Aos
   useEffect(() => {
@@ -22,13 +24,19 @@ const ListingDetails = () => {
 
   // * Listing details data
   useEffect(() => {
-    axios.get(`/products/${id}`).then((data) => {
-      setDetailsInfo(data.data);
-    });
+    setLoading(true);
+    axios
+      .get(`/products/${id}`)
+      .then((data) => {
+        setDetailsInfo(data.data);
+      })
+      .finally(() => setLoading(false));
   }, [axios, id]);
 
   const { name, image, category, email, location, price, description } =
     detailsInfo || {};
+
+  if (loading) return <LoadingSpinner />;
 
   return (
     <div className="bg-accent lg:bg-base-200">

@@ -5,13 +5,17 @@ import useAuth from "../hooks/UseAuth";
 import toast from "react-hot-toast";
 
 const Navbar = () => {
-  const { user, signOUt } = useAuth();
+  const { user, signOUt, setAuthLoading } = useAuth();
+
+  // * Sing Out user
   const handelSignOut = () => {
     signOUt()
       .then(() => {
         toast.success("Signed out successfully!");
+        setAuthLoading(false);
       })
       .catch((error) => {
+        setAuthLoading(false);
         if (error.code === "auth/no-current-user") {
           toast.warning("No user is currently signed in.");
         } else {

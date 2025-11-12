@@ -1,15 +1,20 @@
 import { useEffect, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { FiEye, FiEyeOff } from "react-icons/fi";
-import { Link, Navigate, useLocation, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import MyContainer from "../components/MyContainer";
 import useAuth from "../hooks/UseAuth";
 import { updateProfile } from "firebase/auth";
 import toast from "react-hot-toast";
 
 const Register = () => {
-  const { signUpWithEmailAndPassWord, signInWithGoogle, setUser, user } =
-    useAuth();
+  const {
+    signUpWithEmailAndPassWord,
+    signInWithGoogle,
+    setUser,
+    user,
+    setAuthLoading,
+  } = useAuth();
   const [show, setShow] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
@@ -50,9 +55,11 @@ const Register = () => {
         })
           .then(() => {
             toast.success("Signup successful 🎉");
+            setAuthLoading(false);
             navigate(from, { replace: true });
           })
           .catch((error) => {
+            setAuthLoading(false);
             if (error.code === "auth/requires-recent-login") {
               toast.error("Please sign in again before updating your profile.");
             } else if (error.code === "auth/network-request-failed") {
@@ -65,6 +72,7 @@ const Register = () => {
           });
       })
       .catch((error) => {
+        setAuthLoading(false);
         if (error.code === "auth/email-already-in-use") {
           toast.error("This email is already in use.");
         } else if (error.code === "auth/invalid-email") {
@@ -83,9 +91,11 @@ const Register = () => {
       .then((res) => {
         setUser(res.user);
         toast.success("Signed in with Google successfully!");
+        setAuthLoading(false);
         navigate(from, { replace: true });
       })
       .catch((error) => {
+        setAuthLoading(false);
         if (error.code === "auth/popup-closed-by-user") {
           toast.warning("Sign-in popup closed before completing.");
         } else if (error.code === "auth/popup-blocked") {

@@ -1,30 +1,42 @@
 import { useEffect, useState } from "react";
 import AuthContext from "./AuthContext";
 import auth from "../../Firebase/Firebase.config";
-import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signOut,
+} from "firebase/auth";
+import AuthLoading from "../../components/AuthLoading";
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [authLoading, setAuthLoading] = useState(true);
 
   // * Sing Up with Email and Password
   const signUpWithEmailAndPassWord = (email, Password) => {
+    setAuthLoading(true);
     return createUserWithEmailAndPassword(auth, email, Password);
   };
 
   // * Login with Email and Password
   const loginWithEmailAndPassword = (email, password) => {
+    setAuthLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
   // * Sign In with Google
   const googleProvider = new GoogleAuthProvider();
-  const signInWithGoogle = () =>{
-    return signInWithPopup(auth, googleProvider)
-  }
+  const signInWithGoogle = () => {
+    setAuthLoading(true);
+    return signInWithPopup(auth, googleProvider);
+  };
 
   // * Sing OUt User
   const signOUt = () => {
+    setAuthLoading(true);
     return signOut(auth);
   };
 
@@ -32,7 +44,7 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser || null);
-      setLoading(false);
+      setAuthLoading(false);
     });
     return () => unsubscribe();
   }, []);
@@ -44,10 +56,12 @@ const AuthProvider = ({ children }) => {
     user,
     setUser,
     signOUt,
+    authLoading,
+    setAuthLoading,
   };
 
-  if (loading) {
-    return <h2>Loading...</h2>;
+  if (authLoading) {
+    return <AuthLoading />;
   }
 
   return <AuthContext value={authInfo}>{children}</AuthContext>;

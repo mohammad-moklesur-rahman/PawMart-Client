@@ -1,14 +1,19 @@
 import { useEffect, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { FiEye, FiEyeOff } from "react-icons/fi";
-import { Link, Navigate, useLocation, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import MyContainer from "../components/MyContainer";
 import useAuth from "../hooks/UseAuth";
 import toast from "react-hot-toast";
 
 const Login = () => {
-  const { loginWithEmailAndPassword, signInWithGoogle, setUser, user } =
-    useAuth();
+  const {
+    loginWithEmailAndPassword,
+    signInWithGoogle,
+    setUser,
+    user,
+    setAuthLoading,
+  } = useAuth();
   const [show, setShow] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
@@ -32,8 +37,10 @@ const Login = () => {
       .then((res) => {
         setUser(res.user);
         toast.success("Login successful 🎉");
+        setAuthLoading(false);
       })
       .catch((error) => {
+        setAuthLoading(false);
         if (error.code === "auth/invalid-email") {
           toast.error("Invalid email format.");
         } else if (error.code === "auth/user-not-found") {
@@ -56,8 +63,10 @@ const Login = () => {
       .then((res) => {
         setUser(res.user);
         toast.success("Signed in with Google successfully!");
+        setAuthLoading(false);
       })
       .catch((error) => {
+        setAuthLoading(false);
         if (error.code === "auth/popup-closed-by-user") {
           toast.warning("Sign-in popup closed before completing.");
         } else if (error.code === "auth/popup-blocked") {

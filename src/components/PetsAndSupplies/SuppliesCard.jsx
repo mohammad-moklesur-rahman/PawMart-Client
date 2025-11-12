@@ -4,6 +4,7 @@ import "aos/dist/aos.css";
 import MyContainer from "../MyContainer";
 import useAxios from "../../hooks/useAxios";
 import { useNavigate } from "react-router";
+import LoadingSpinner from "../LoadingSpinner";
 
 const SuppliesCard = () => {
   const axios = useAxios();
@@ -13,9 +14,13 @@ const SuppliesCard = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get("/products").then((data) => {
-      setData(data.data);
-    });
+    setLoading(true);
+    axios
+      .get("/products")
+      .then((data) => {
+        setData(data.data);
+      })
+      .finally(() => setLoading(false));
   }, [axios]);
 
   // * for Aos
@@ -43,6 +48,8 @@ const SuppliesCard = () => {
       setLoading(false);
     }, 300);
   };
+
+  if (loading) return <LoadingSpinner />;
 
   return (
     <MyContainer>
@@ -85,55 +92,49 @@ const SuppliesCard = () => {
         </div>
 
         {/* product Card */}
-        {loading ? (
-          <h2>Loadding....</h2>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredData.map((productInfo) => (
-              <div
-                key={productInfo._id}
-                className="hover:scale-105 cursor-pointer transition-transform duration-200"
-              >
-                <div className="card bg-primary h-full shadow-sm">
-                  <figure className="px-4 pt-4">
-                    <img
-                      src={productInfo.image}
-                      alt={productInfo.category}
-                      className="rounded-xl h-50 w-full"
-                    />
-                  </figure>
-                  <div className="card-body">
-                    <h2 className="card-title text-accent">
-                      {productInfo.name}
-                    </h2>
-                    <p className="text-gray-800">
-                      <span className="font-semibold">Category:</span>{" "}
-                      {productInfo.category}
-                    </p>
-                    <p className="text-gray-800">
-                      <span className="font-semibold ">Location:</span>{" "}
-                      {productInfo.location}
-                    </p>
-                    <p className="text-gray-800">
-                      <span className="font-semibold">Price:</span> $
-                      {productInfo.price}
-                    </p>
-                    <div className="card-actions">
-                      <button
-                        onClick={() =>
-                          navigate(`listing-details/${productInfo._id}`)
-                        }
-                        className="btn bg-secondary text-green-500 hover:bg-accent w-full"
-                      >
-                        See Details
-                      </button>
-                    </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filteredData.map((productInfo) => (
+            <div
+              key={productInfo._id}
+              className="hover:scale-105 cursor-pointer transition-transform duration-200"
+            >
+              <div className="card bg-primary h-full shadow-sm">
+                <figure className="px-4 pt-4">
+                  <img
+                    src={productInfo.image}
+                    alt={productInfo.category}
+                    className="rounded-xl h-50 w-full"
+                  />
+                </figure>
+                <div className="card-body">
+                  <h2 className="card-title text-accent">{productInfo.name}</h2>
+                  <p className="text-gray-800">
+                    <span className="font-semibold">Category:</span>{" "}
+                    {productInfo.category}
+                  </p>
+                  <p className="text-gray-800">
+                    <span className="font-semibold ">Location:</span>{" "}
+                    {productInfo.location}
+                  </p>
+                  <p className="text-gray-800">
+                    <span className="font-semibold">Price:</span> $
+                    {productInfo.price}
+                  </p>
+                  <div className="card-actions">
+                    <button
+                      onClick={() =>
+                        navigate(`listing-details/${productInfo._id}`)
+                      }
+                      className="btn bg-secondary text-green-500 hover:bg-accent w-full"
+                    >
+                      See Details
+                    </button>
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
-        )}
+            </div>
+          ))}
+        </div>
       </div>
     </MyContainer>
   );

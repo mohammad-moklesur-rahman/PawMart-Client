@@ -5,10 +5,12 @@ import { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useNavigate } from "react-router";
+import LoadingSpinner from "../LoadingSpinner";
 
 const LatestListings = () => {
   const axios = useAxios();
   const [latestData, setLatestData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   // * for Aos
@@ -20,10 +22,16 @@ const LatestListings = () => {
   }, []);
 
   useEffect(() => {
-    axios.get("/products/latest").then((data) => {
-      setLatestData(data.data);
-    });
+    setLoading(true);
+    axios
+      .get("/products/latest")
+      .then((data) => {
+        setLatestData(data.data);
+      })
+      .finally(() => setLoading(false));
   }, [axios]);
+
+  if (loading) return <LoadingSpinner />;
 
   return (
     <div className="bg-secondary-content pb-20">

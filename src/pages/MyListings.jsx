@@ -6,9 +6,11 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import UpdateModal from "../components/MyListings/UpdateModal";
 import Swal from "sweetalert2";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const MyListings = () => {
   const [myProducts, setMyProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { user } = useAuth();
   const axios = useAxios();
 
@@ -22,9 +24,11 @@ const MyListings = () => {
 
   // * My listings product
   useEffect(() => {
+    setLoading(true);
     axios
       .get(`/products/my-listings?email=${user.email}`)
-      .then((res) => setMyProducts(res.data));
+      .then((res) => setMyProducts(res.data))
+      .finally(() => setLoading(false));
   }, [axios, user.email]);
 
   // * Update product from Ui
@@ -63,6 +67,8 @@ const MyListings = () => {
       }
     });
   };
+
+  if (loading) return <LoadingSpinner />;
 
   return (
     <div className="bg-secondary pb-20 pt-10">

@@ -7,9 +7,11 @@ import useAuth from "../../hooks/UseAuth";
 import useAxios from "../../hooks/useAxios";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import LoadingSpinner from "../LoadingSpinner";
 
 const SalesReport = () => {
   const [salesData, setSalesData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const { user } = useAuth();
   const axios = useAxios();
@@ -24,9 +26,11 @@ const SalesReport = () => {
 
   // * Get My order
   useEffect(() => {
+    setLoading(true);
     axios
       .get(`/orders/my-orders?email=${user.email}`)
-      .then((res) => setSalesData(res.data));
+      .then((res) => setSalesData(res.data))
+      .finally(() => setLoading(false));
   }, [axios, user.email]);
 
   const downloadReport = async () => {
@@ -91,6 +95,8 @@ const SalesReport = () => {
       );
     }
   };
+
+  if (loading) return <LoadingSpinner />;
 
   return (
     <div className="bg-secondary pt-10 pb-20">

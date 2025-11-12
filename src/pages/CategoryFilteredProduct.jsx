@@ -2,18 +2,26 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import useAxios from "../hooks/useAxios";
 import MyContainer from "../components/MyContainer";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const CategoryFilteredProduct = () => {
   const { categoryName } = useParams();
   const axios = useAxios();
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`/products?category=${categoryName}`).then((data) => {
-      setFilteredProducts(data.data);
-    });
+    setLoading(true);
+    axios
+      .get(`/products?category=${categoryName}`)
+      .then((data) => {
+        setFilteredProducts(data.data);
+      })
+      .finally(() => setLoading(false));
   }, [axios, categoryName]);
+
+  if(loading) return <LoadingSpinner />
 
   return (
     <div className="bg-secondary pb-20">
