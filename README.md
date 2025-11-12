@@ -1,1 +1,1 @@
-React, React Router, Tailwind Css, DaisyUI, React Icons, Swiper, Animate.css, React Simple Typewriter, Aos, Firebase, React Hot Toast, Axios, Sweetalert2, React fast marquee,
+React, React Router, Tailwind Css, DaisyUI, React Icons, Swiper, Animate.css, React Simple Typewriter, Aos, Firebase, React Hot Toast, Axios, Sweetalert2, React fast marquee, jsPDF + jsPDF-AutoTable,

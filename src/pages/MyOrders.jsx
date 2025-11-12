@@ -1,8 +1,11 @@
-import React from 'react'
+import SalesReport from "../components/MyOrder/SalesReport"
+
 
 const MyOrders = () => {
   return (
-    <div>MyOrders</div>
+    <div>
+      <SalesReport />
+    </div>
   )
 }
 
