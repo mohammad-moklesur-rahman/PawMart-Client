@@ -3,9 +3,13 @@ import MyContainer from "./MyContainer";
 import logo from "../assets/logo.png";
 import useAuth from "../hooks/UseAuth";
 import toast from "react-hot-toast";
+import useTheme from "../hooks/useTheme";
+import { motion, AnimatePresence } from "framer-motion";
+import { FaMoon, FaSun } from "react-icons/fa";
 
 const Navbar = () => {
   const { user, signOUt, setAuthLoading } = useAuth();
+  const { theme, toggleTheme } = useTheme();
 
   // * Sing Out user
   const handelSignOut = () => {
@@ -141,6 +145,38 @@ const Navbar = () => {
                 </NavLink>
               </>
             )}
+
+            {/* 🔘 Animated Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              className="btn btn-ghost btn-circle text-2xl relative overflow-hidden ml-4"
+            >
+              <AnimatePresence mode="wait" initial={false}>
+                {theme === "light" ? (
+                  <motion.span
+                    key="moon"
+                    initial={{ y: -20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: 20, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="absolute inset-0 flex items-center justify-center"
+                  >
+                    <FaMoon />
+                  </motion.span>
+                ) : (
+                  <motion.span
+                    key="sun"
+                    initial={{ y: -20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: 20, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="absolute inset-0 flex items-center justify-center text-accent"
+                  >
+                    <FaSun />
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </button>
           </div>
         </div>
       </MyContainer>
