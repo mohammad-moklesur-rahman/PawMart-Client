@@ -41,7 +41,7 @@ const ListingDetails = () => {
   return (
     <div className="bg-accent lg:bg-base-200">
       <MyContainer>
-        <div className="bg-secondary grid lg:grid-cols-12 gap-12 pl-6">
+        <div className="bg-secondary grid lg:grid-cols-12 gap-12 lg:pl-6">
           {/* left area for details */}
           <div className="md:col-span-8">
             <div className="px-2 lg:px-0">

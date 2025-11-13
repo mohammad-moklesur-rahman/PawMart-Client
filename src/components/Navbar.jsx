@@ -98,9 +98,9 @@ const Navbar = () => {
             <Link to="/" className="text-xl">
               <div className="flex items-center hover:scale-105 transition-all">
                 <figure>
-                  <img className="w-12" src={logo} alt="" />
+                  <img className="w-8 md:w-12" src={logo} alt="" />
                 </figure>
-                <h2 className="text-[#FF9292] text-[20px] font-bold">
+                <h2 className="text-[#FF9292] text-[14px] md:text-[20px] font-bold">
                   <span className="text-green-500">P</span>aw
                   <span className="text-green-500">M</span>art
                 </h2>
@@ -115,7 +115,7 @@ const Navbar = () => {
               <>
                 <div className="dropdown dropdown-end">
                   <div tabIndex={0} className="avatar avatar-online">
-                    <div className="w-12 rounded-full border-2 border-primary">
+                    <div className="w-8 sm:w-10 rounded-full border-2 border-primary">
                       <img
                         src={
                           user.photoURL ||
@@ -137,10 +137,10 @@ const Navbar = () => {
               </>
             ) : (
               <>
-                <NavLink to="/login" className="btn primary-btn mr-3">
+                <NavLink to="/login" className="btn rounded-full bg-secondary text-green-500 w-14 sm:w-fit mr-1 sm:px-6 sm:mr-3">
                   Login
                 </NavLink>
-                <NavLink to="/register" className="btn primary-btn">
+                <NavLink to="/register" className="btn w-20 sm:w-fit rounded-full bg-secondary text-green-500 sm:px-6">
                   Register
                 </NavLink>
               </>
@@ -149,7 +149,7 @@ const Navbar = () => {
             {/* 🔘 Animated Theme Toggle */}
             <button
               onClick={toggleTheme}
-              className="btn btn-ghost btn-circle text-2xl relative overflow-hidden ml-4"
+              className="btn btn-ghost btn-circle text-[18px] sm:text-2xl relative overflow-hidden ml-1 md:ml-4"
             >
               <AnimatePresence mode="wait" initial={false}>
                 {theme === "light" ? (
