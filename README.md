@@ -93,3 +93,38 @@ Using packages:
 - **404 Page**
 
 ---
+
+## ⚙️ Installation & Setup (Client)
+
+### 1️⃣ Clone the repository
+```bash
+git clone https://github.com/mohammad-moklesur-rahman/PawMart-Client.git
+cd PawMart-Client
+```
+
+### 2️⃣ Install dependencies
+```bash
+npm install
+```
+
+### 3️⃣ Create a `.env` file
+```
+VITE_APIKEY=your_firebase_api_key
+VITE_AUTHDOMAIN=your_firebase_auth_domain
+VITE_PROJECTID=your_firebase_project_id
+VITE_STORAGEBUCKET=your_firebase_storage_bucket
+VITE_MESSAGINGSENDERID=your_firebase_sender_id
+VITE_APPID=your_firebase_app_id
+```
+
+### 4️⃣ Run the project
+```bash
+npm run dev
+```
+
+Now the client is available at:
+```
+http://localhost:5173/
+```
+
+---
