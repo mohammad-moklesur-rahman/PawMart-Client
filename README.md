@@ -41,7 +41,11 @@ Using packages:
 - Cors  
 - Dotenv  
 - Nodemon  
-- MVC Architecture  
+- MVC Architecture
+
+### **Deployment**
+- Frontend (firebase)
+- Backend (vercel)
 
 ---
 
