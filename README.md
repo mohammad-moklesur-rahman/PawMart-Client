@@ -40,7 +40,8 @@ Using packages:
 - MongoDB  
 - Cors  
 - Dotenv  
-- Nodemon  
+- Nodemon
+- Firebase Admin SDK  
 - MVC Architecture
 
 ### **Deployment**
